@@ -2,10 +2,11 @@ package com.projetoBar.service;
 
 import com.projetoBar.model.ComandaModel;
 import com.projetoBar.model.ProdutoModel;
+import com.projetoBar.model.ProdutosNaComandaModel;
 import com.projetoBar.repository.ComandaRepository;
 import com.projetoBar.repository.ProdutoRepository;
+import com.projetoBar.repository.ProdutosNaComandaRepository;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class ProdutosNaComandaService {
 
     private final ProdutoRepository produtoRepository;
     private final ComandaRepository comandaRepository;
+    private final ProdutosNaComandaRepository produtosNaComandaRepository;
 
 
 
@@ -27,21 +29,25 @@ public class ProdutosNaComandaService {
 
 //        Integer idProduto = produto.selecionarIdProduto();
 
-        comandaRepository.inserirProdutoNaComanda(produto.getId(),
-                comanda.getDataCriacao(),
+        produtosNaComandaRepository.inserirProdutoNaComanda(idComanda,
                 produto.getNome(),
                 produto.getValorDeVenda(),
-                quantidade,
-                comanda.getStatus());
+                quantidade);
 
     }
 
-    public List<ProdutoModel> listaDeProdutosNaComanda(Integer id){
+    public List<ProdutosNaComandaModel> listaDeProdutosNaComanda(Integer id){
 
-        List<ProdutoModel>listaDeProdutos = comandaRepository.selecionarProdutosNaComanda(id);
+        List<ProdutosNaComandaModel>listaDeProdutos = produtosNaComandaRepository.selecionarProdutosNaComanda(id);
 
         return listaDeProdutos;
     }
 
 
+    public Double totalDeValor(Integer idComanda) {
+
+        Double valorTotalComanda = produtosNaComandaRepository.selecionarValorTotalComanda(idComanda);
+
+        return valorTotalComanda;
+    }
 }

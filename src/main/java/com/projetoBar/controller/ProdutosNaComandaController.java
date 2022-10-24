@@ -1,8 +1,7 @@
 package com.projetoBar.controller;
 
-import com.projetoBar.model.ProdutoModel;
+import com.projetoBar.model.ProdutosNaComandaModel;
 import com.projetoBar.model.dto.ProdutoDTO;
-import com.projetoBar.service.ComandaService;
 import com.projetoBar.service.ProdutosNaComandaService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +17,9 @@ public class ProdutosNaComandaController {
 
 
     @GetMapping(path = "/produtosNaComanda/{idComanda}")
-    public ResponseEntity<List<ProdutoModel>> produtosNaComanda(@PathVariable Integer idComanda){
+    public ResponseEntity<List<ProdutosNaComandaModel>> produtosNaComanda(@PathVariable Integer idComanda){
 
-        List<ProdutoModel>listaDeProdutos =  produtosNaComandaService.listaDeProdutosNaComanda(idComanda);
+        List<ProdutosNaComandaModel>listaDeProdutos =  produtosNaComandaService.listaDeProdutosNaComanda(idComanda);
 
         return ResponseEntity.ok(listaDeProdutos);
 

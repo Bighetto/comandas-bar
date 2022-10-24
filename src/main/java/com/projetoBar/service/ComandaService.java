@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -29,23 +31,27 @@ public class ComandaService {
 
     }
 
-    public void fechamentoDeComanda(Integer id){
+    public Double fechamentoDeComanda(Integer id){
 
         ComandaModel comanda = comandaRepository.selecionarPeloNumero(id);
 
         Double valorTotal = produtosNaComandaService.totalDeValor(id);
 
+        comanda.setValorTotal(valorTotal);
+
         comanda.setStatus(StatusEnum.FECHADO.toString());
 
 
         comandaRepository.save(comanda);
+
+        return valorTotal;
     }
 
-    public Double totalDeValor(Integer idComanda){
+    public List<ComandaModel> comandasAbertas(){
 
-        ComandaModel comanda = comandaRepository.selecionarPeloNumero(idComanda);
+       List<ComandaModel> comandasAbertas = comandaRepository.listaDeComandasAbertas();
 
-        return comanda.getValorTotal();
+       return comandasAbertas;
 
     }
 

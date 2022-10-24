@@ -27,11 +27,9 @@ public class ProdutosNaComandaModel {
     @JsonProperty("nomeProduto")
     private String nomeProduto;
 
-    @Column(name = "fk_idproduto")
-    @JsonProperty("idProduto")
-    private Integer idProduto;
-
     @Column(name = "quantidade")
     @JsonProperty("quantidade")
     private Integer quantidade;
+
+
 }
