@@ -25,12 +25,15 @@ public class ProdutosNaComandaController {
 
     }
 
-    @PostMapping(path = "/inserirProdutoNaComanda/{idComanda}/quantidade/{quantidadeProduto}")
-    public ResponseEntity<String>inserirProdutoNaComanda(@RequestBody ProdutoDTO produto, @PathVariable Integer idComanda, @PathVariable Integer quantidadeProduto){
+    @PostMapping(path = "/inserirProdutoNaComanda/{idComanda}/quantidade/{quantidadeProduto}/nome/{nomeProduto}")
+    public ResponseEntity<String>inserirProdutoNaComanda(@PathVariable String nomeproduto, @PathVariable Integer idComanda, @PathVariable Integer quantidadeProduto){
 
-        produtosNaComandaService.adicionarProduto(idComanda, produto.getIdproduto(), quantidadeProduto);
 
-        return ResponseEntity.ok("Produto: " + produto + " adicionado com sucesso na comanda: " + idComanda);
+
+
+        produtosNaComandaService.adicionarProduto(idComanda, nomeproduto, quantidadeProduto);
+
+        return ResponseEntity.ok("Produto: " + nomeproduto + " adicionado com sucesso na comanda: " + idComanda);
 
     }
 }

@@ -1,0 +1,35 @@
+version: “3.7”
+services:
+  projeto-bar:
+    build:
+      args:
+        versao: 1
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    environment:
+      ip: 0.0.0.0
+      username: root
+      database: projetoBar
+      password: teste
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: teste
+      MYSQL_DATABASE: projetoBar
+    ports:
+      - "3306:3306"
+    restart: always
+#    volume:
+#      - mysql: /var/lib/mysql
+#    networks:
+#      projetoBar:
+#        - aliases:
+#            - mysql_db
+volumes:
+  mysql:
+    driver: local
+
+
+

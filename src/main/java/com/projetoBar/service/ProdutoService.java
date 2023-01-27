@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.projetoBar.validadores.TipoValidador.validadorDoTipo;
-
 @Service
 @AllArgsConstructor
 public class ProdutoService {
@@ -28,10 +26,11 @@ public class ProdutoService {
 
     }
 
-    public List<ProdutoModel> selecionarPeloTipo(TipoProdutoEnum produtoEnum){
+    public List<ProdutoModel> selecionarPeloTipo(TipoProdutoEnum bebidaEnum){
 
 
-        List<ProdutoModel> listaDeProdutos = validadorDoTipo(produtoEnum, produtoRepository);
+        List<ProdutoModel> listaDeProdutos = TipoValidador.validadorDoTipo(bebidaEnum, produtoRepository);
+
 
         return listaDeProdutos;
 

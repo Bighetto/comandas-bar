@@ -21,13 +21,12 @@ public class ProdutosNaComandaService {
 
 
 
-    public void adicionarProduto(Integer idComanda, Integer idProduto, Integer quantidade){
+    public void adicionarProduto(Integer idComanda, String nomeProduto, Integer quantidade){
 
-        ProdutoModel produto = produtoRepository.selecionarProdutoPeloId(idProduto);
+        ProdutoModel produto = produtoRepository.selecionarProdutoPeloNome(nomeProduto);
 
         ComandaModel comanda = comandaRepository.selecionarPeloNumero(idComanda);
 
-//        Integer idProduto = produto.selecionarIdProduto();
 
         produtosNaComandaRepository.inserirProdutoNaComanda(idComanda,
                 produto.getNome(),

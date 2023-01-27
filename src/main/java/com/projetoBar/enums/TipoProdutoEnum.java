@@ -7,5 +7,8 @@ public enum TipoProdutoEnum {
     WHISKY,
     VODKA,
     PINGA,
-    LICOR;
+    LICOR,
+    ZOMO,
+    ZIGGY,
+    TANGIERS
 }
