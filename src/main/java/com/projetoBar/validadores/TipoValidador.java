@@ -10,15 +10,7 @@ import java.util.stream.Collectors;
 public interface TipoValidador {
 
 
-    public static List<ProdutoModel> validadorDoTipo(TipoProdutoEnum produtoEnum, ProdutoRepository repository){
-
-
-        List<ProdutoModel> lista =  repository.selecionarTudo();
-
-        return lista.stream().filter( p -> p.getTipo() == produtoEnum).collect(Collectors.toList());
-
-
-    }
+    public List<ProdutoModel> validadorDoTipo(TipoProdutoEnum produtoEnum, ProdutoRepository repository);
 
 
 }

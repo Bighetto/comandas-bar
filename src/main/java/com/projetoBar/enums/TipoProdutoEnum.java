@@ -2,13 +2,18 @@ package com.projetoBar.enums;
 
 public enum TipoProdutoEnum {
 
-    CERVEJA,
-    SEM_ALCOOL,
-    WHISKY,
-    VODKA,
-    PINGA,
-    LICOR,
-    ZOMO,
-    ZIGGY,
-    TANGIERS
+    Cerveja,
+    Refrigerante,
+    Vodka,
+    Whisky,
+    Gin,
+    Agua,
+    Chopp,
+    Drinks,
+    especiais,
+    Cachaça,
+    Energético,
+    Porção,
+    Doces,
+    Rosh
 }

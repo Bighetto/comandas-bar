@@ -5,6 +5,7 @@ import com.projetoBar.model.ProdutoModel;
 import com.projetoBar.model.dto.ProdutoDTO;
 import com.projetoBar.repository.ProdutoRepository;
 import com.projetoBar.validadores.TipoValidador;
+import com.projetoBar.validadores.TipoValidadorImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ProdutoService {
 
-    private final ProdutoRepository produtoRepository;
+    private ProdutoRepository produtoRepository;
+    private TipoValidadorImpl tipoValidador;
 
     public List<ProdutoModel> getByNome(String nome){
 
@@ -29,7 +31,7 @@ public class ProdutoService {
     public List<ProdutoModel> selecionarPeloTipo(TipoProdutoEnum bebidaEnum){
 
 
-        List<ProdutoModel> listaDeProdutos = TipoValidador.validadorDoTipo(bebidaEnum, produtoRepository);
+        List<ProdutoModel> listaDeProdutos = tipoValidador.validadorDoTipo(bebidaEnum, produtoRepository);
 
 
         return listaDeProdutos;
