@@ -2,6 +2,7 @@ package com.projetoBar.service;
 
 import com.projetoBar.enums.TipoProdutoEnum;
 import com.projetoBar.model.ProdutoModel;
+import com.projetoBar.model.dto.ExibirProdutoDTO;
 import com.projetoBar.model.dto.ProdutoDTO;
 import com.projetoBar.repository.ProdutoRepository;
 import com.projetoBar.validadores.TipoValidador;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,21 +22,34 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
     private TipoValidadorImpl tipoValidador;
 
-    public List<ProdutoModel> getByNome(String nome){
+    public List<ExibirProdutoDTO> getByNome(String nome){
 
-        List<ProdutoModel> user = produtoRepository.getByNome(nome);
+        List<ProdutoModel> produtos = produtoRepository.getByNome(nome);
 
-        return user;
+        List<ExibirProdutoDTO> exibirProdutoDTOS = new ArrayList<>();
+
+        for (ProdutoModel produtoModel: produtos){
+
+            exibirProdutoDTOS.add(new ExibirProdutoDTO(produtoModel));
+        }
+
+        return exibirProdutoDTOS;
 
     }
 
-    public List<ProdutoModel> selecionarPeloTipo(TipoProdutoEnum bebidaEnum){
+    public List<ExibirProdutoDTO> selecionarPeloTipo(TipoProdutoEnum bebidaEnum){
 
 
         List<ProdutoModel> listaDeProdutos = tipoValidador.validadorDoTipo(bebidaEnum, produtoRepository);
 
+        List<ExibirProdutoDTO> exibirProdutoDTOS = new ArrayList<>();
 
-        return listaDeProdutos;
+        for (ProdutoModel produtoModel: listaDeProdutos){
+
+            exibirProdutoDTOS.add(new ExibirProdutoDTO(produtoModel));
+        }
+
+        return exibirProdutoDTOS;
 
     }
 

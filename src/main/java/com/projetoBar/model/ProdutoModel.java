@@ -2,6 +2,7 @@ package com.projetoBar.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.projetoBar.enums.TipoProdutoEnum;
+import com.projetoBar.model.dto.ExibirProdutoDTO;
 import com.projetoBar.model.dto.ProdutoInsertDTO;
 import lombok.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProdutoModel {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,5 +46,7 @@ public class ProdutoModel {
         this.tipo = dto.getTipo();
 
     }
+
+
 
 }

@@ -2,6 +2,7 @@ package com.projetoBar.controller;
 
 import com.projetoBar.enums.TipoProdutoEnum;
 import com.projetoBar.model.ProdutoModel;
+import com.projetoBar.model.dto.ExibirProdutoDTO;
 import com.projetoBar.model.dto.ProdutoDTO;
 import com.projetoBar.model.dto.ProdutoInsertDTO;
 import com.projetoBar.service.ProdutoService;
@@ -27,9 +28,9 @@ public class ProdutoController {
     private final ProdutoService produtoService;
 
     @GetMapping(path = "/getNome/{nome}") // TODO: acho que nao vai precisar
-    public ResponseEntity<List<ProdutoModel>>selecionarPorNome(@PathVariable String nome){
+    public ResponseEntity<List<ExibirProdutoDTO>>selecionarPorNome(@PathVariable String nome){
 
-        List<ProdutoModel> user = produtoService.getByNome(nome);
+        List<ExibirProdutoDTO> user = produtoService.getByNome(nome);
 
         return ResponseEntity.ok(user);
 
@@ -37,11 +38,11 @@ public class ProdutoController {
 
 
     @GetMapping(path = "tipo/{tipo}")
-    public ResponseEntity<List<ProdutoModel>>selecionarPorTipo(@PathVariable TipoProdutoEnum tipo){
+    public ResponseEntity<List<ExibirProdutoDTO>>selecionarPorTipo(@PathVariable TipoProdutoEnum tipo){
 
-        List<ProdutoModel> listaBebida = produtoService.selecionarPeloTipo(tipo);
+        List<ExibirProdutoDTO> listaDeProdutos = produtoService.selecionarPeloTipo(tipo);
 
-        return ResponseEntity.ok(listaBebida);
+        return ResponseEntity.ok(listaDeProdutos);
 
     }
 
