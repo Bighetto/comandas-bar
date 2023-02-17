@@ -1,6 +1,7 @@
 package com.projetoBar.controller;
 
 import com.projetoBar.enums.TipoProdutoEnum;
+import com.projetoBar.enums.TiposGenericosEnum;
 import com.projetoBar.model.ProdutoModel;
 import com.projetoBar.model.dto.ExibirProdutoDTO;
 import com.projetoBar.model.dto.ProdutoDTO;
@@ -43,6 +44,15 @@ public class ProdutoController {
         List<ExibirProdutoDTO> listaDeProdutos = produtoService.selecionarPeloTipo(tipo);
 
         return ResponseEntity.ok(listaDeProdutos);
+
+    }
+
+    @GetMapping(path = "/tipoGenerico/{tipo}")
+    public ResponseEntity<List<ExibirProdutoDTO>>tiposGenericos(@PathVariable TiposGenericosEnum tipo){
+
+        List<ExibirProdutoDTO> listaDeGenericos = produtoService.exibirComTipoGenerico(tipo);
+
+        return ResponseEntity.ok(listaDeGenericos);
 
     }
 

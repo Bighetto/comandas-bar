@@ -1,12 +1,14 @@
 package com.projetoBar.service;
 
 import com.projetoBar.enums.TipoProdutoEnum;
+import com.projetoBar.enums.TiposGenericosEnum;
 import com.projetoBar.model.ProdutoModel;
 import com.projetoBar.model.dto.ExibirProdutoDTO;
 import com.projetoBar.model.dto.ProdutoDTO;
 import com.projetoBar.repository.ProdutoRepository;
-import com.projetoBar.validadores.TipoValidador;
-import com.projetoBar.validadores.TipoValidadorImpl;
+import com.projetoBar.validadores.TipoValidadorGenericoImpl;
+import com.projetoBar.validadores.TipoValidadorProdutoImpl;
+import com.projetoBar.validadores.TipoValidadorTipoGenerico;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +22,9 @@ import java.util.List;
 public class ProdutoService {
 
     private ProdutoRepository produtoRepository;
-    private TipoValidadorImpl tipoValidador;
+    private TipoValidadorProdutoImpl tipoValidador;
+
+    private TipoValidadorGenericoImpl tipoValidadorGenerico;
 
     public List<ExibirProdutoDTO> getByNome(String nome){
 
@@ -37,14 +41,29 @@ public class ProdutoService {
 
     }
 
-    public List<ExibirProdutoDTO> selecionarPeloTipo(TipoProdutoEnum bebidaEnum){
+    public List<ExibirProdutoDTO> selecionarPeloTipo(TipoProdutoEnum tipoProdutoEnum){
 
 
-        List<ProdutoModel> listaDeProdutos = tipoValidador.validadorDoTipo(bebidaEnum, produtoRepository);
+        List<ProdutoModel> listaDeProdutos = tipoValidador.validadorDoTipo(tipoProdutoEnum.toString(), produtoRepository);
 
         List<ExibirProdutoDTO> exibirProdutoDTOS = new ArrayList<>();
 
         for (ProdutoModel produtoModel: listaDeProdutos){
+
+            exibirProdutoDTOS.add(new ExibirProdutoDTO(produtoModel));
+        }
+
+        return exibirProdutoDTOS;
+
+    }
+
+    public List<ExibirProdutoDTO> exibirComTipoGenerico(TiposGenericosEnum tipo){
+
+        List<ProdutoModel> listaDeProdutos = tipoValidadorGenerico.validadorDoTipo(tipo.toString(), produtoRepository);
+
+        List<ExibirProdutoDTO> exibirProdutoDTOS = new ArrayList<>();
+
+        for (ProdutoModel produtoModel : listaDeProdutos){
 
             exibirProdutoDTOS.add(new ExibirProdutoDTO(produtoModel));
         }

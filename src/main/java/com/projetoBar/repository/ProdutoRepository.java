@@ -1,6 +1,7 @@
 package com.projetoBar.repository;
 
 import com.projetoBar.model.ProdutoModel;
+import com.projetoBar.model.dto.ExibirProdutoDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -30,6 +31,12 @@ public interface ProdutoRepository extends JpaRepository<ProdutoModel, Integer> 
     @Query(value = "update produto set valor_de_venda = :valorDeVenda where nome= :nome ;",nativeQuery = true)
     void updateValorProduto(@Param("valorDeVenda")Double valorDeVenda,
                        @Param("nome")String nome);
+
+    @Query(value = "SELECT * FROM produto p WHERE tipo_generico = :tipo", nativeQuery = true)
+    List<ProdutoModel> selecionarPeloTipoGenerico(@Param("tipo") String tipoGenerico);
+
+    @Query(value = "SELECT * FROM produto p WHERE tipo = :tipo", nativeQuery = true)
+    List<ProdutoModel> selecionarPeloTipo(@Param("tipo") String tipoGenerico);
 
 //    @Modifying
 //    @Transactional
