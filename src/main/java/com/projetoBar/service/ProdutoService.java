@@ -41,6 +41,21 @@ public class ProdutoService {
 
     }
 
+    public List<ExibirProdutoDTO> listarNomesPeloTipo(String nome, TipoProdutoEnum tipo){
+
+        List<ProdutoModel> produtos = produtoRepository.getNomePeloTipo(tipo.toString(), nome);
+
+        List<ExibirProdutoDTO> exibirProdutoDTOS = new ArrayList<>();
+
+        for (ProdutoModel produtoModel: produtos){
+
+            exibirProdutoDTOS.add(new ExibirProdutoDTO(produtoModel));
+        }
+
+        return exibirProdutoDTOS;
+
+    }
+
     public List<ExibirProdutoDTO> selecionarPeloTipo(TipoProdutoEnum tipoProdutoEnum){
 
 

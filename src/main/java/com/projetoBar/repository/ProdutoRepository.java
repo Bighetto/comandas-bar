@@ -17,6 +17,11 @@ public interface ProdutoRepository extends JpaRepository<ProdutoModel, Integer> 
     @Query(value = "select * from produto where nome like '%' :nome '%' ;",nativeQuery = true)
     List<ProdutoModel> getByNome(@Param("nome") String nome);
 
+    @Query(value = "select * from produto where tipo = :tipo and nome like '%' :nome '%'",nativeQuery = true)
+    List<ProdutoModel> getNomePeloTipo(@Param("tipo")String tipo,
+                                       @Param("nome") String nome
+                                       );
+
     @Query(value = "select * from produto;",nativeQuery = true)
     List<ProdutoModel> selecionarTudo();
 

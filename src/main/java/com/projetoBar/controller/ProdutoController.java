@@ -29,10 +29,19 @@ public class ProdutoController {
 
     private final ProdutoService produtoService;
 
-    @GetMapping(path = "/getNome/{nome}") // TODO: acho que nao vai precisar
+    @GetMapping(path = "/getNome/{nome}")
     public ResponseEntity<List<ExibirProdutoDTO>>selecionarPorNome(@PathVariable String nome){
 
         List<ExibirProdutoDTO> user = produtoService.getByNome(nome);
+
+        return ResponseEntity.ok(user);
+
+    }
+
+    @GetMapping(path = "/tipo/{tipo}/nome/{nome}")
+    public ResponseEntity<List<ExibirProdutoDTO>>selecionarNomePeloTipo(@PathVariable TipoProdutoEnum tipo,@PathVariable String nome){
+
+        List<ExibirProdutoDTO> user = produtoService.listarNomesPeloTipo(nome, tipo);
 
         return ResponseEntity.ok(user);
 

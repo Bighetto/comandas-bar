@@ -30,8 +30,6 @@ public class ProdutosNaComandaController {
     public ResponseEntity<String>inserirProdutoNaComanda(@PathVariable String nomeproduto, @PathVariable Integer idComanda, @PathVariable Integer quantidadeProduto){
 
 
-
-
         produtosNaComandaService.adicionarProduto(idComanda, nomeproduto, quantidadeProduto);
 
         return ResponseEntity.ok("Produto: " + nomeproduto + " adicionado com sucesso na comanda: " + idComanda);
