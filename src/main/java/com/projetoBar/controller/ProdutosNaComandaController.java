@@ -2,6 +2,7 @@ package com.projetoBar.controller;
 
 import com.projetoBar.model.ProdutosNaComandaModel;
 import com.projetoBar.model.dto.ProdutoDTO;
+import com.projetoBar.model.dto.ProdutosNaComandaDTO;
 import com.projetoBar.service.ProdutosNaComandaService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,21 +19,21 @@ public class ProdutosNaComandaController {
 
 
     @GetMapping(path = "/produtosNaComanda/{idComanda}")
-    public ResponseEntity<List<ProdutosNaComandaModel>> produtosNaComanda(@PathVariable Integer idComanda){
+    public ResponseEntity<List<ProdutosNaComandaDTO>> produtosNaComanda(@PathVariable Integer idComanda){
 
-        List<ProdutosNaComandaModel>listaDeProdutos =  produtosNaComandaService.listaDeProdutosNaComanda(idComanda);
+        List<ProdutosNaComandaDTO>listaDeProdutos =  produtosNaComandaService.listaDeProdutosNaComanda(idComanda);
 
         return ResponseEntity.ok(listaDeProdutos);
 
     }
 
-    @PostMapping(path = "/inserirProdutoNaComanda/{idComanda}/quantidade/{quantidadeProduto}/nome/{nomeProduto}")
-    public ResponseEntity<String>inserirProdutoNaComanda(@PathVariable String nomeproduto, @PathVariable Integer idComanda, @PathVariable Integer quantidadeProduto){
+    @PostMapping(path = "/inserirProdutoNaComanda/{idComanda}/quantidade/{quantidadeProduto}/idProduto/{idProduto}")
+    public ResponseEntity<ProdutosNaComandaDTO>inserirProdutoNaComanda(@PathVariable Integer idComanda, @PathVariable Integer quantidadeProduto, @PathVariable Integer idProduto){
 
 
-        produtosNaComandaService.adicionarProduto(idComanda, nomeproduto, quantidadeProduto);
+        ProdutosNaComandaDTO produto = produtosNaComandaService.adicionarProduto(idComanda, quantidadeProduto, idProduto);
 
-        return ResponseEntity.ok("Produto: " + nomeproduto + " adicionado com sucesso na comanda: " + idComanda);
+        return ResponseEntity.ok(produto);
 
     }
 }

@@ -1,6 +1,7 @@
 package com.projetoBar.controller;
 
 import com.projetoBar.model.ComandaModel;
+import com.projetoBar.model.dto.ExibirTudoNaComandaDTO;
 import com.projetoBar.service.ComandaService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -41,12 +42,12 @@ public class ComandaController {
 
 
     @PostMapping(path = "fecharComanda/{idComanda}")
-    public ResponseEntity<String>fechamentoDeComanda(@PathVariable Integer idComanda){
+    public ResponseEntity<ExibirTudoNaComandaDTO>fechamentoDeComanda(@PathVariable Integer idComanda){
 
-        Double valorTotal = comandaService.fechamentoDeComanda(idComanda);
+        ExibirTudoNaComandaDTO fechamento = comandaService.fechamentoDeComanda(idComanda);
 
 
-        return ResponseEntity.ok("Comanda: " + idComanda + "fechada com sucesso! Valor total da Comanda: " + valorTotal);
+        return ResponseEntity.ok(fechamento);
 
     }
 

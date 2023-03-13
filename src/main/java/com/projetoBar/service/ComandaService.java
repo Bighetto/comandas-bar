@@ -2,8 +2,12 @@ package com.projetoBar.service;
 
 import com.projetoBar.enums.StatusEnum;
 import com.projetoBar.model.ComandaModel;
+import com.projetoBar.model.ProdutosNaComandaModel;
+import com.projetoBar.model.dto.ExibirTudoNaComandaDTO;
+import com.projetoBar.model.dto.ProdutosNaComandaDTO;
 import com.projetoBar.repository.ComandaRepository;
 import com.projetoBar.repository.ProdutoRepository;
+import com.projetoBar.repository.ProdutosNaComandaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +35,7 @@ public class ComandaService {
 
     }
 
-    public Double fechamentoDeComanda(Integer id){
+    public ExibirTudoNaComandaDTO fechamentoDeComanda(Integer id){
 
         ComandaModel comanda = comandaRepository.selecionarPeloNumero(id);
 
@@ -41,10 +45,13 @@ public class ComandaService {
 
         comanda.setStatus(StatusEnum.FECHADO.toString());
 
+        List<ProdutosNaComandaDTO> listaDeProdutos = produtosNaComandaService.listaDeProdutosNaComanda(id);
 
         comandaRepository.save(comanda);
 
-        return valorTotal;
+        ExibirTudoNaComandaDTO exibirDto = new ExibirTudoNaComandaDTO(id, valorTotal, listaDeProdutos);
+
+        return exibirDto;
     }
 
     public List<ComandaModel> comandasAbertas(){

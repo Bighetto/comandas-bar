@@ -3,10 +3,8 @@ package com.projetoBar.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Data
@@ -14,7 +12,6 @@ import javax.persistence.Table;
 public class ProdutosNaComandaModel {
 
 
-    @Id
     @Column(name = "idcomanda")
     @JsonProperty("idcomanda")
     private Integer idcomanda;
@@ -27,9 +24,21 @@ public class ProdutosNaComandaModel {
     @JsonProperty("nomeProduto")
     private String nomeProduto;
 
+
+
     @Column(name = "quantidade")
     @JsonProperty("quantidade")
     private Integer quantidade;
+
+    @Column(name = "data_comanda")
+    @JsonProperty("dataComanda")
+    private Timestamp dataComanda;
+
+    @Id
+    @Column(name = "identificador")
+    @JsonProperty("identificador")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer identificador;
 
 
 }

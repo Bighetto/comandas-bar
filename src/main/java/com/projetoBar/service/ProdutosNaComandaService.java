@@ -3,12 +3,15 @@ package com.projetoBar.service;
 import com.projetoBar.model.ComandaModel;
 import com.projetoBar.model.ProdutoModel;
 import com.projetoBar.model.ProdutosNaComandaModel;
+import com.projetoBar.model.dto.ExibirProdutoDTO;
+import com.projetoBar.model.dto.ProdutosNaComandaDTO;
 import com.projetoBar.repository.ComandaRepository;
 import com.projetoBar.repository.ProdutoRepository;
 import com.projetoBar.repository.ProdutosNaComandaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,9 +24,9 @@ public class ProdutosNaComandaService {
 
 
 
-    public void adicionarProduto(Integer idComanda, String nomeProduto, Integer quantidade){
+    public ProdutosNaComandaDTO adicionarProduto(Integer idComanda, Integer quantidade, Integer idProduto){
 
-        ProdutoModel produto = produtoRepository.selecionarProdutoPeloNome(nomeProduto);
+        ProdutoModel produto = produtoRepository.selecionarProdutoPeloId(idProduto);
 
         ComandaModel comanda = comandaRepository.selecionarPeloNumero(idComanda);
 
@@ -31,15 +34,24 @@ public class ProdutosNaComandaService {
         produtosNaComandaRepository.inserirProdutoNaComanda(idComanda,
                 produto.getNome(),
                 produto.getValorDeVenda(),
-                quantidade);
+                quantidade,
+                comanda.getDataCriacao());
+
+        ProdutosNaComandaDTO produtoDTO = new ProdutosNaComandaDTO(produto, quantidade);
+
+        return produtoDTO;
 
     }
 
-    public List<ProdutosNaComandaModel> listaDeProdutosNaComanda(Integer id){
+    public List<ProdutosNaComandaDTO> listaDeProdutosNaComanda(Integer id){
 
         List<ProdutosNaComandaModel>listaDeProdutos = produtosNaComandaRepository.selecionarProdutosNaComanda(id);
 
-        return listaDeProdutos;
+        List<ProdutosNaComandaDTO> listaDto = new ArrayList<>();
+
+        listaDeProdutos.forEach(produto -> listaDto.add(new ProdutosNaComandaDTO(produto)));
+
+        return listaDto;
     }
 
 

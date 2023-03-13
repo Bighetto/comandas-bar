@@ -25,7 +25,7 @@ public interface ProdutoRepository extends JpaRepository<ProdutoModel, Integer> 
     @Query(value = "select * from produto;",nativeQuery = true)
     List<ProdutoModel> selecionarTudo();
 
-    @Query(value = "select * from produto where idproduto = :id ;", nativeQuery = true )
+    @Query(value = "select * from produto where id = :id ;", nativeQuery = true )
     ProdutoModel selecionarProdutoPeloId(@Param("id")Integer idProduto);
 
     @Query(value = "select * from produto where nome = :nome ;", nativeQuery = true )

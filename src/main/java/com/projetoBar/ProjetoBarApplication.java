@@ -14,6 +14,7 @@ public class ProjetoBarApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoBarApplication.class, args);
+		
 	}
 
 }
