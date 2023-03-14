@@ -30,18 +30,14 @@ public class ProdutosNaComandaService {
 
         ComandaModel comanda = comandaRepository.selecionarPeloNumero(idComanda);
 
-
-        produtosNaComandaRepository.inserirProdutoNaComanda(idComanda,
-                produto.getNome(),
-                produto.getValorDeVenda(),
-                quantidade,
-                comanda.getDataCriacao());
+        validarQuantidade(produto, quantidade, comanda);
 
         ProdutosNaComandaDTO produtoDTO = new ProdutosNaComandaDTO(produto, quantidade);
 
         return produtoDTO;
 
     }
+
 
     public List<ProdutosNaComandaDTO> listaDeProdutosNaComanda(Integer id){
 
@@ -53,6 +49,32 @@ public class ProdutosNaComandaService {
 
         return listaDto;
     }
+
+    public void validarQuantidade(ProdutoModel produto, Integer quantidade, ComandaModel comanda){
+
+        ProdutosNaComandaModel produtoNaComanda = produtosNaComandaRepository.selecionarSeJaExiste(produto.getNome(), comanda.getDataCriacao(), comanda.getId());
+
+        if (produtoNaComanda != null) {
+
+            Integer quantidadeReal = produtoNaComanda.getQuantidade() + quantidade;
+
+            produtosNaComandaRepository.atualizarValorQuantidade(quantidadeReal,
+                    comanda.getId(),
+                    produto.getNome(),
+                    comanda.getDataCriacao());
+
+        }else {
+            produtosNaComandaRepository.inserirProdutoNaComanda(comanda.getId(),
+                    produto.getNome(),
+                    produto.getValorDeVenda(),
+                    quantidade,
+                    comanda.getDataCriacao());
+        }
+
+
+    }
+
+
 
 
     public Double totalDeValor(Integer idComanda) {

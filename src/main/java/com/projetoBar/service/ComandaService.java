@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class ComandaService {
     public ComandaModel aberturaDeComanda(){
 
         ComandaModel novaComanda = new ComandaModel();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         novaComanda.setDataCriacao(Timestamp.valueOf(LocalDateTime.now()));
         novaComanda.setStatus(StatusEnum.ABERTO.toString());
 

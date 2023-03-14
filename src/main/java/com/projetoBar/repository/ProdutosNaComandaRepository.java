@@ -21,15 +21,6 @@ public interface ProdutosNaComandaRepository extends JpaRepository<ProdutosNaCom
     @Query(value = "select SUM(valor_produto * quantidade) as valor_total  from produtos_na_comanda where idcomanda = :idcomanda ; ", nativeQuery = true)
     Double selecionarValorTotalComanda(@Param("idcomanda")Integer idComanda);
 
-    @Transactional
-    @Modifying
-    @Query(value = "insert into produtos_na_comanda (idcomanda, valor_produto, nome_produto, quantidade) \n" +
-            "values (:idcomanda, :valorProduto, :nomeProduto, :quantidade);",nativeQuery = true)
-    void inserirProduto(@Param("idcomanda")Integer idComanda,
-                        @Param("valorProduto")Double valorProduto,
-                        @Param("nomeProduto")String nomeProduto,
-                        @Param("quantidade")Integer quantidade);
-
 
     @Transactional
     @Modifying
@@ -41,6 +32,20 @@ public interface ProdutosNaComandaRepository extends JpaRepository<ProdutosNaCom
                                  @Param("quantidade")Integer quantidade,
                                  @Param("dataComanda") Date dataComanda);
 
+    @Query(value = "select * from produtos_na_comanda where nome_produto  = :nomeProduto ;", nativeQuery = true)
+    ProdutosNaComandaModel selecionarPeloNome(@Param("nomeProduto")String nomeProduto);
+
+    @Query(value = "select * from produtos_na_comanda where nome_produto  = :nomeProduto and data_comanda = :dataComanda and idcomanda = :idComanda ;", nativeQuery = true)
+    ProdutosNaComandaModel selecionarSeJaExiste(@Param("nomeProduto")String nomeProduto,
+                                                @Param("dataComanda")Date dataComanda,
+                                                @Param("idComanda")Integer idComanda);
 
 
+    @Transactional
+    @Modifying
+    @Query(value = "update produtos_na_comanda set quantidade = :quantidade where idcomanda = :idComanda and nome_produto = :nomeProduto and data_comanda = :dataComanda", nativeQuery = true)
+    void atualizarValorQuantidade(@Param("quantidade")Integer quantidade,
+                                  @Param("idComanda")Integer idComanda,
+                                  @Param("nomeProduto")String nomeProduto,
+                                  @Param("dataComanda")Date dataComanda);
 }
