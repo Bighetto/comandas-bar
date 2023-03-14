@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class ExibirProdutoDTO {
 
+    @JsonProperty("id")
+    private Integer id;
+
 
     @JsonProperty(value = "nome")
     private String nome;
@@ -27,6 +30,7 @@ public class ExibirProdutoDTO {
 
     public ExibirProdutoDTO(ProdutoModel produtoModel){
 
+        this.id = produtoModel.getId();
         this.nome = produtoModel.getNome();
         this.valorDeVenda = produtoModel.getValorDeVenda();
         this.tipo = produtoModel.getTipo();
