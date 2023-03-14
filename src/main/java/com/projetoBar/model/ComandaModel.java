@@ -1,13 +1,11 @@
 package com.projetoBar.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.projetoBar.enums.StatusEnum;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
 @Table(name = "comanda")
 @Entity
@@ -15,14 +13,13 @@ import java.util.List;
 public class ComandaModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("idcomanda")
     @Column(name = "idcomanda")
     private Integer id;
 
     @Column(name = "data_criacao")
     @JsonProperty("dataCriacao")
-    private Timestamp dataCriacao;
+    private LocalDate dataCriacao;
 
     @Column(name = "valor_total")
     @JsonProperty("valorTotal")

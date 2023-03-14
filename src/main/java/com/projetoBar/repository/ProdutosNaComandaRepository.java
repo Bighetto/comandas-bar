@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -30,14 +32,14 @@ public interface ProdutosNaComandaRepository extends JpaRepository<ProdutosNaCom
                                  @Param("nomeProduto")String nomeProduto,
                                  @Param("valorProduto")Double valorProduto,
                                  @Param("quantidade")Integer quantidade,
-                                 @Param("dataComanda") Date dataComanda);
+                                 @Param("dataComanda") LocalDate dataComanda);
 
     @Query(value = "select * from produtos_na_comanda where nome_produto  = :nomeProduto ;", nativeQuery = true)
     ProdutosNaComandaModel selecionarPeloNome(@Param("nomeProduto")String nomeProduto);
 
     @Query(value = "select * from produtos_na_comanda where nome_produto  = :nomeProduto and data_comanda = :dataComanda and idcomanda = :idComanda ;", nativeQuery = true)
     ProdutosNaComandaModel selecionarSeJaExiste(@Param("nomeProduto")String nomeProduto,
-                                                @Param("dataComanda")Date dataComanda,
+                                                @Param("dataComanda")LocalDate dataComanda,
                                                 @Param("idComanda")Integer idComanda);
 
 
@@ -47,5 +49,5 @@ public interface ProdutosNaComandaRepository extends JpaRepository<ProdutosNaCom
     void atualizarValorQuantidade(@Param("quantidade")Integer quantidade,
                                   @Param("idComanda")Integer idComanda,
                                   @Param("nomeProduto")String nomeProduto,
-                                  @Param("dataComanda")Date dataComanda);
+                                  @Param("dataComanda") LocalDate dataComanda);
 }

@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,12 +30,28 @@ public class ComandaService {
 
         ComandaModel novaComanda = new ComandaModel();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        novaComanda.setDataCriacao(Timestamp.valueOf(LocalDateTime.now()));
+        novaComanda.setDataCriacao(LocalDate.now());
+        novaComanda.setId(validarId(novaComanda.getDataCriacao()));
         novaComanda.setStatus(StatusEnum.ABERTO.toString());
 
         comandaRepository.save(novaComanda);
 
         return novaComanda;
+
+    }
+
+    private Integer validarId(LocalDate data) {
+
+        List<ComandaModel> lista = comandaRepository.selecionarTodasAsComandasDoDia(data);
+
+        if (lista.isEmpty()){
+
+            return 1;
+
+        }else {
+            int valor = lista.get(lista.size() - 1).getId();
+            return valor + 1;
+        }
 
     }
 
