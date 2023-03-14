@@ -28,7 +28,7 @@ public class ProdutosNaComandaService {
 
         ProdutoModel produto = produtoRepository.selecionarProdutoPeloId(idProduto);
 
-        ComandaModel comanda = comandaRepository.selecionarPeloNumero(idComanda);
+        ComandaModel comanda = comandaRepository.selecionarPeloNumeroEStatus(idComanda);
 
         validarQuantidade(produto, quantidade, comanda);
 

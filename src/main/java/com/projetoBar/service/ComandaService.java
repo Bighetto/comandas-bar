@@ -26,15 +26,17 @@ public class ComandaService {
     private final ComandaRepository comandaRepository;
     private final ProdutosNaComandaService produtosNaComandaService;
 
-    public ComandaModel aberturaDeComanda(){
+    public ComandaModel aberturaDeComanda(Integer id){
 
         ComandaModel novaComanda = new ComandaModel();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         novaComanda.setDataCriacao(LocalDate.now());
-        novaComanda.setId(validarId(novaComanda.getDataCriacao()));
+        novaComanda.setId(id);
+        novaComanda.setValorTotal(0.00);
         novaComanda.setStatus(StatusEnum.ABERTO.toString());
 
-        comandaRepository.save(novaComanda);
+        comandaRepository.abrirComanda(id,
+                LocalDate.now(),
+                StatusEnum.ABERTO.toString());
 
         return novaComanda;
 
@@ -57,7 +59,9 @@ public class ComandaService {
 
     public ExibirTudoNaComandaDTO fechamentoDeComanda(Integer id){
 
-        ComandaModel comanda = comandaRepository.selecionarPeloNumero(id);
+
+
+        ComandaModel comanda = comandaRepository.selecionarPeloNumeroEStatus(id);
 
         Double valorTotal = produtosNaComandaService.totalDeValor(id);
 

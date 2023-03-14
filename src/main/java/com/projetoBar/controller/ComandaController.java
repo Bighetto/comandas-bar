@@ -6,10 +6,7 @@ import com.projetoBar.service.ComandaService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,10 +19,10 @@ public class ComandaController {
 
 
 
-    @PostMapping(path = "/abrirComanda")
-    public ResponseEntity<String>abrirComanda(){
+    @PostMapping(path = "/abrirComanda/{id}")
+    public ResponseEntity<String>abrirComanda(@PathVariable Integer id){
 
-        ComandaModel comanda = comandaService.aberturaDeComanda();
+        ComandaModel comanda = comandaService.aberturaDeComanda(id);
 
         return ResponseEntity.ok("Abertura de comanda realizada! numero da comanda: " + comanda.getId().toString());
     }
@@ -41,10 +38,10 @@ public class ComandaController {
 
 
 
-    @PostMapping(path = "fecharComanda/{idComanda}")
-    public ResponseEntity<ExibirTudoNaComandaDTO>fechamentoDeComanda(@PathVariable Integer idComanda){
+    @PostMapping(path = "fecharComanda/{id}")
+    public ResponseEntity<ExibirTudoNaComandaDTO>fechamentoDeComanda(@PathVariable Integer id){
 
-        ExibirTudoNaComandaDTO fechamento = comandaService.fechamentoDeComanda(idComanda);
+        ExibirTudoNaComandaDTO fechamento = comandaService.fechamentoDeComanda(id);
 
 
         return ResponseEntity.ok(fechamento);

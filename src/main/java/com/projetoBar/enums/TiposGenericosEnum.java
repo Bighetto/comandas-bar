@@ -5,7 +5,8 @@ public enum TiposGenericosEnum {
     BEBIDAS("BEBIDAS"),
     ESSENCIAS("ESSENCIAS"),
     PORCOES("PORCOES"),
-    DOCES("DOCES");
+    DOCES("DOCES"),
+    PROMOCAO("PROMOCAO");
 
     private String tipoGenerico;
 
