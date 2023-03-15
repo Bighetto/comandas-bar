@@ -42,20 +42,12 @@ public class ComandaService {
 
     }
 
-    private Integer validarId(LocalDate data) {
-
-        List<ComandaModel> lista = comandaRepository.selecionarTodasAsComandasDoDia(data);
-
-        if (lista.isEmpty()){
-
-            return 1;
-
-        }else {
-            int valor = lista.get(lista.size() - 1).getId();
-            return valor + 1;
-        }
-
-    }
+//    private Integer validarMontanteDiario(LocalDate data) { //TODO: IMPLEMENTACAO FUTURA DE SELECIONAR COMANDA NO DIA PARA EXIBIR EM UM DASH
+//
+//        List<ComandaModel> lista = comandaRepository.selecionarTodasAsComandasDoDia(data);
+//
+//
+//    }
 
     public ExibirTudoNaComandaDTO fechamentoDeComanda(Integer id){
 

@@ -10,6 +10,8 @@ import java.util.Date;
 @Table(name = "comanda")
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ComandaModel {
 
     @Id
