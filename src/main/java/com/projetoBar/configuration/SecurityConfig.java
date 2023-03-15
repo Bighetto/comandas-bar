@@ -1,6 +1,5 @@
 package com.projetoBar.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,8 +18,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("arthur").password("{noop}teste").roles("ADMIN");
-//                .and()
-//                .withUser("user").password("{noop}user").roles("USER");
     }
 
     @Override
@@ -31,19 +28,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
-                .anyRequest().authenticated();
-//                .antMatchers("/produtos", "/produtos/**").hasRole("ADMIN");
-//                .antMatchers(HttpMethod.GET, "/produtos").permitAll()
-//                .antMatchers(HttpMethod.PUT, "/produtos").hasRole("ADMIN")
-//                .antMatchers(HttpMethod.DELETE, "/produtos").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/**").permitAll()
+                .anyRequest().authenticated()
+                .and().csrf().disable();
 
     }
 
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .inMemoryAuthentication()
-//                .withUser("arthur").password("{noop}password").roles("ADMIN");
+//    @Bean
+//    public PasswordEncoder passwordEncoder(){
+//        return NoOpPasswordEncoder.getInstance();
 //    }
 }

@@ -115,11 +115,17 @@ public class ProdutoService {
     }
 
 
-    public ProdutoDTO atualizarValorProduto(ProdutoDTO produtoDTO){
+    public ProdutoDTO atualizarValorProduto(Integer idProduto, Double valor){
 
 
-        produtoRepository.updateValorProduto(produtoDTO.getValorDeVenda(),
-                produtoDTO.getNome());
+        ProdutoModel produto =produtoRepository.getById(idProduto);
+
+        produto.setValorDeVenda(valor);
+
+        ProdutoDTO produtoDTO = new ProdutoDTO(produto);
+
+        produtoRepository.save(produto);
+
 
         return produtoDTO;
 

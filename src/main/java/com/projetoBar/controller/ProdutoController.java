@@ -120,12 +120,12 @@ public class ProdutoController {
 
     }
 
-    @PutMapping(path = "/alterarValorProduto")
-    public ResponseEntity<String>alterarValorProduto(@RequestBody ProdutoDTO produtoDTO){
+    @PutMapping(path = "/alterarValorProduto/{idProduto}/valor/{valor}")
+    public ResponseEntity<String>alterarValorProduto(@PathVariable Integer idProduto, @PathVariable Double valor){
 
-        produtoService.atualizarValorProduto(produtoDTO);
+        ProdutoDTO produto = produtoService.atualizarValorProduto(idProduto, valor);
 
-        return ResponseEntity.ok("Preco do produto: " + produtoDTO.getNome() + " atualizado para : " + produtoDTO.getValorDeVenda());
+        return ResponseEntity.ok("Preco do produto: " + produto.getNome() + " atualizado para : " + produto.getValorDeVenda());
 
     }
 

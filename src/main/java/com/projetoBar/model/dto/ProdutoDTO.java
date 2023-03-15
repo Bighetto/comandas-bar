@@ -20,6 +20,7 @@ public class ProdutoDTO {
 
 
     public ProdutoDTO(ProdutoModel produtoModel) {
+        this.idproduto = produtoModel.getId();
         this.nome = produtoModel.getNome();
         this.valorDeVenda = produtoModel.getValorDeVenda();
     }
