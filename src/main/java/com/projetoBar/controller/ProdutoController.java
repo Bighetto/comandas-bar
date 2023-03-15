@@ -25,6 +25,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @CrossOrigin
+@RequestMapping("/produtos")
 public class ProdutoController {
 
     private final ProdutoService produtoService;
