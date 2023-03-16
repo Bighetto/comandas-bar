@@ -14,8 +14,9 @@ import java.util.List;
 @Repository
 public interface ProdutoRepository extends JpaRepository<ProdutoModel, Integer> {
 
-    @Query(value = "select * from produto where nome like '%' :nome '%' ;",nativeQuery = true)
-    List<ProdutoModel> getByNome(@Param("nome") String nome);
+    @Query(value = "select * from produto where nome like '%' :nome '%' and tipo_generico = :tipoGenerico ;",nativeQuery = true)
+    List<ProdutoModel> getByNome(@Param("nome") String nome,
+                                 @Param("tipoGenerico")String tipoGenerico);
 
     @Query(value = "select * from produto where tipo = :tipo and nome like '%' :nome '%'",nativeQuery = true)
     List<ProdutoModel> getNomePeloTipo(@Param("tipo")String tipo,

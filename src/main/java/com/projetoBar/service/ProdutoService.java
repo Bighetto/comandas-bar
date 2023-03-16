@@ -26,9 +26,9 @@ public class ProdutoService {
 
     private TipoValidadorGenericoImpl tipoValidadorGenerico;
 
-    public List<ExibirProdutoDTO> getByNome(String nome){
+    public List<ExibirProdutoDTO> getByNome(String nome, String tipoGenerico){
 
-        List<ProdutoModel> produtos = produtoRepository.getByNome(nome);
+        List<ProdutoModel> produtos = produtoRepository.getByNome(nome, tipoGenerico);
 
         List<ExibirProdutoDTO> exibirProdutoDTOS = new ArrayList<>();
 

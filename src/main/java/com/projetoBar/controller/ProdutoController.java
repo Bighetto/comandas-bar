@@ -30,10 +30,10 @@ public class ProdutoController {
 
     private final ProdutoService produtoService;
 
-    @GetMapping(path = "/getNome/{nome}")
-    public ResponseEntity<List<ExibirProdutoDTO>>selecionarPorNome(@PathVariable String nome){
+    @GetMapping(path = "/getNome/{nome}/tipoGenerico/{tipoGenerico}")
+    public ResponseEntity<List<ExibirProdutoDTO>>selecionarPorNome(@PathVariable String nome, @PathVariable TiposGenericosEnum tipoGenerico){
 
-        List<ExibirProdutoDTO> user = produtoService.getByNome(nome);
+        List<ExibirProdutoDTO> user = produtoService.getByNome(nome, tipoGenerico.toString());
 
         return ResponseEntity.ok(user);
 
