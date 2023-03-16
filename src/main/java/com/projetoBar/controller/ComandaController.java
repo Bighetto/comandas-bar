@@ -69,6 +69,15 @@ public class ComandaController {
 
     }
 
+    @GetMapping(path = "/exibirFechamentoDeComanda/{id}")
+    public ResponseEntity<ExibirTudoNaComandaDTO>exibirFechamentoDeComanda(@PathVariable Integer id){
+
+        ExibirTudoNaComandaDTO fechamento = comandaService.exibirFechamentoDeComanda(id);
+
+        return ResponseEntity.ok(fechamento);
+
+    }
+
 
 
 

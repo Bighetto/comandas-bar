@@ -51,19 +51,28 @@ public class ComandaService {
 
     public ExibirTudoNaComandaDTO fechamentoDeComanda(Integer id){
 
-
-
-        ComandaModel comanda = comandaRepository.selecionarPeloNumeroEStatus(id);
-
         Double valorTotal = produtosNaComandaService.totalDeValor(id);
 
-        comanda.setValorTotal(valorTotal);
-
-        comanda.setStatus(StatusEnum.FECHADO.toString());
+        if (valorTotal == null){
+            valorTotal = 0.0;
+        }
 
         List<ProdutosNaComandaDTO> listaDeProdutos = produtosNaComandaService.listaDeProdutosNaComanda(id);
 
-        comandaRepository.save(comanda);
+        comandaRepository.atualizarComandaAberta(valorTotal, id);
+
+        ExibirTudoNaComandaDTO exibirDto = new ExibirTudoNaComandaDTO(id, valorTotal, listaDeProdutos);
+
+        return exibirDto;
+    }
+
+    public ExibirTudoNaComandaDTO exibirFechamentoDeComanda(Integer id){
+
+
+        Double valorTotal = produtosNaComandaService.totalDeValor(id);
+
+        List<ProdutosNaComandaDTO> listaDeProdutos = produtosNaComandaService.listaDeProdutosNaComanda(id);
+
 
         ExibirTudoNaComandaDTO exibirDto = new ExibirTudoNaComandaDTO(id, valorTotal, listaDeProdutos);
 

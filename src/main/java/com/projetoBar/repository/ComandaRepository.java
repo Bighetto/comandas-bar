@@ -16,12 +16,15 @@ import java.util.List;
 @Repository
 public interface ComandaRepository extends JpaRepository<ComandaModel, Integer> {
 
-    @Query(value = "select * from comanda where idcomanda = :id and data_criacao = :dataCriacao and status = 'ABERTO' ",nativeQuery = true)
-    ComandaModel selecionarPeloNumeroEData(@Param("id") Integer id,
-                                      @Param("dataCriacao")LocalDate data);
 
     @Query(value = "select * from comanda where idcomanda = :id and status = 'ABERTO' ;",nativeQuery = true)
     ComandaModel selecionarPeloNumeroEStatus(@Param("id") Integer id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update comanda set valor_total = :valorTotal, status= 'FECHADO' where idcomanda = :id and status = 'ABERTO' ;",nativeQuery = true)
+    void atualizarComandaAberta(@Param("valorTotal")Double valorTotal,
+                                        @Param("id") Integer id);
 
     @Transactional
     @Modifying
