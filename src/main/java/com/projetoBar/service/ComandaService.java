@@ -25,6 +25,7 @@ public class ComandaService {
 
     private final ComandaRepository comandaRepository;
     private final ProdutosNaComandaService produtosNaComandaService;
+    private final ProdutosNaComandaRepository produtosNaComandaRepository;
 
     public ComandaModel aberturaDeComanda(Integer id){
 
@@ -60,6 +61,8 @@ public class ComandaService {
         List<ProdutosNaComandaDTO> listaDeProdutos = produtosNaComandaService.listaDeProdutosNaComanda(id);
 
         comandaRepository.atualizarComandaAberta(valorTotal, id);
+
+        produtosNaComandaRepository.atualizarFechamentoDeComanda(id);
 
         ExibirTudoNaComandaDTO exibirDto = new ExibirTudoNaComandaDTO(id, valorTotal, listaDeProdutos);
 
