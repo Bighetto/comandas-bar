@@ -36,7 +36,7 @@ public interface ProdutosNaComandaRepository extends JpaRepository<ProdutosNaCom
                                  @Param("dataComanda") LocalDate dataComanda);
 
 
-    @Query(value = "select * from produtos_na_comanda where nome_produto  = :nomeProduto and data_comanda = :dataComanda and idcomanda = :idComanda ;", nativeQuery = true)
+    @Query(value = "select * from produtos_na_comanda where nome_produto  = :nomeProduto and data_comanda = :dataComanda and idcomanda = :idComanda and status_comanda = 'ABERTO' ;", nativeQuery = true)
     ProdutosNaComandaModel selecionarSeJaExiste(@Param("nomeProduto")String nomeProduto,
                                                 @Param("dataComanda")LocalDate dataComanda,
                                                 @Param("idComanda")Integer idComanda);
