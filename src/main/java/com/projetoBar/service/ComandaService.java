@@ -29,17 +29,30 @@ public class ComandaService {
 
     public ComandaModel aberturaDeComanda(Integer id){
 
+        ComandaModel comandaAberta = comandaRepository.selecionarPeloNumeroEStatus(id);
+
         ComandaModel novaComanda = new ComandaModel();
         novaComanda.setDataCriacao(LocalDate.now());
         novaComanda.setId(id);
         novaComanda.setValorTotal(0.00);
         novaComanda.setStatus(StatusEnum.ABERTO.toString());
 
-        comandaRepository.abrirComanda(id,
-                LocalDate.now(),
-                StatusEnum.ABERTO.toString());
+        if (comandaAberta == null){
 
-        return novaComanda;
+            comandaRepository.abrirComanda(id,
+                    LocalDate.now(),
+                    StatusEnum.ABERTO.toString());
+
+            return novaComanda;
+
+        }else {
+
+            return new ComandaModel(404, LocalDate.now(), 0.00,"ERRO DE ABERTURA, NUMERO DE COMANDA INDISPONIVEL");
+        }
+
+
+
+
 
     }
 
@@ -89,6 +102,4 @@ public class ComandaService {
        return comandasAbertas;
 
     }
-
-
 }

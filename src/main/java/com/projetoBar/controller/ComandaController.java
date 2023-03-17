@@ -23,18 +23,11 @@ public class ComandaController {
 
 
     @PostMapping(path = "/abrirComanda/{id}")
-    public ResponseEntity<String>abrirComanda(@PathVariable Integer id){
+    public ResponseEntity<ComandaModel>abrirComanda(@PathVariable Integer id){
 
-        try {
             ComandaModel comanda = comandaService.aberturaDeComanda(id);
 
-            return ResponseEntity.ok("Abertura de comanda realizada! numero da comanda: " + comanda.getId().toString());
-
-        }catch (Exception e){
-
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nao foi possivel abrir a comanda. " + e.getMessage());
-        }
-
+                return ResponseEntity.ok(comanda);
 
     }
 
