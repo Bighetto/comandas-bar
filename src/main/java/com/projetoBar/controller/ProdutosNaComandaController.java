@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
 import java.util.List;
 
 @RestController
@@ -34,6 +35,17 @@ public class ProdutosNaComandaController {
         ProdutosNaComandaDTO produto = produtosNaComandaService.adicionarProduto(idComanda, quantidadeProduto, idProduto);
 
         return ResponseEntity.ok(produto);
+
+    }
+
+    @DeleteMapping(path = "/deletarProdutoNaComanda/idComanda{idComanda}/idProduto{idProduto}")
+    public ResponseEntity<String> removerProdutoNaComanda(@PathVariable Integer idComanda, @PathVariable Integer idProduto){
+
+        produtosNaComandaService.deletarProdutoNaComanda(idComanda, idProduto);
+
+
+        return ResponseEntity.ok("Deletado com sucesso!");
+
 
     }
 }

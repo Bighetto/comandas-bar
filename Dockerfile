@@ -11,14 +11,11 @@ RUN apt-get update && apt-get install -y maven
 RUN mvn dependency:go-offline
 
 # Compile sua aplicação e gere o jar
-RUN mvn clean install
+RUN mvn clean install package
 
 # Copie o arquivo jar da sua aplicação para o diretório de trabalho
-COPY ./target/comandas-bar-0.0.1-SNAPSHOT.jar /app/comandas-bar.jar
-
-# Defina a variável de ambiente para a aplicação
-ENV JAVA_OPTS="database=loungebeach;ip=localhost;username=root;password=Fiap1234"
+COPY ./target/comandas-bar-1.0.jar /app/comandas-bar.jar
 
 # Execute a aplicação como um processo sozinho
-CMD java $JAVA_OPTS -jar comandas-bar.jar
+CMD ["java", "-jar", "comandas-bar.jar"]
 

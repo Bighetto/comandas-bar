@@ -1,18 +1,20 @@
 version: “3.7”
 services:
   projeto-bar:
-    build:
-      args:
-        versao: 1
+    build: .
     ports:
-      - "8080:80"
+      - "8080:8080"
+    environment:
+      IP: mysql
+      USERNAME_DB: root
+      DATABASE: projetoBar
+      PASSWORD_DB: teste
     depends_on:
       - mysql
-    environment:
-      ip: 0.0.0.0
-      username: root
-      database: projetoBar
-      password: teste
+    networks:
+      - projetobar
+    volumes:
+      - ./app:/usr/src/app
   mysql:
     image: mysql:8.0
     environment:
@@ -21,15 +23,14 @@ services:
     ports:
       - "3306:3306"
     restart: always
-#    volume:
-#      - mysql: /var/lib/mysql
-#    networks:
-#      projetoBar:
-#        - aliases:
-#            - mysql_db
-volumes:
-  mysql:
-    driver: local
+    networks:
+      - projetobar
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./sql-scripts:/docker-entrypoint-initdb.d/
+networks:
+  projetobar:
+    driver: bridge
 
 
 
