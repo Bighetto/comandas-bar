@@ -1,14 +1,11 @@
 package com.projetoBar.controller;
 
-import com.projetoBar.model.ProdutosNaComandaModel;
-import com.projetoBar.model.dto.ProdutoDTO;
-import com.projetoBar.model.dto.ProdutosNaComandaDTO;
+import com.projetoBar.dto.ProdutosNaComandaDTO;
 import com.projetoBar.service.ProdutosNaComandaService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.Path;
 import java.util.List;
 
 @RestController

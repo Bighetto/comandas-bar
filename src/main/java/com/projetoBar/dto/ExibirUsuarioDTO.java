@@ -1,4 +1,4 @@
-package com.projetoBar.model.dto;
+package com.projetoBar.dto;
 
 import com.projetoBar.configuration.security.UserModel;
 import lombok.AllArgsConstructor;

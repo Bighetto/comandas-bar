@@ -2,21 +2,14 @@ package com.projetoBar.service;
 
 import com.projetoBar.enums.StatusEnum;
 import com.projetoBar.model.ComandaModel;
-import com.projetoBar.model.ProdutosNaComandaModel;
-import com.projetoBar.model.dto.ExibirTudoNaComandaDTO;
-import com.projetoBar.model.dto.ProdutosNaComandaDTO;
+import com.projetoBar.dto.ExibirTudoNaComandaDTO;
+import com.projetoBar.dto.ProdutosNaComandaDTO;
 import com.projetoBar.repository.ComandaRepository;
-import com.projetoBar.repository.ProdutoRepository;
 import com.projetoBar.repository.ProdutosNaComandaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service

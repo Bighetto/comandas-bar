@@ -1,6 +1,5 @@
-package com.projetoBar.model.dto;
+package com.projetoBar.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

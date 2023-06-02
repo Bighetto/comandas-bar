@@ -27,7 +27,7 @@ services:
       - projetobar
     volumes:
       - ./data:/var/lib/mysql
-      - ./sql-scripts:/docker-entrypoint-initdb.d/
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 networks:
   projetobar:
     driver: bridge

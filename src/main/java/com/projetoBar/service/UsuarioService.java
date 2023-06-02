@@ -2,7 +2,7 @@ package com.projetoBar.service;
 
 import com.projetoBar.configuration.security.UserModel;
 import com.projetoBar.configuration.security.UsuarioRepository;
-import com.projetoBar.model.dto.ExibirUsuarioDTO;
+import com.projetoBar.dto.ExibirUsuarioDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;

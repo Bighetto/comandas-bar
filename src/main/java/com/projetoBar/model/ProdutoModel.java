@@ -1,9 +1,6 @@
 package com.projetoBar.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.projetoBar.enums.TipoProdutoEnum;
-import com.projetoBar.enums.TiposGenericosEnum;
-import com.projetoBar.model.dto.ProdutoInsertDTO;
+import com.projetoBar.dto.ProdutoInsertDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

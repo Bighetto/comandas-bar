@@ -63,8 +63,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return source;
     }
 
-
-    public static void main(String[] args) {
-        System.out.println(new BCryptPasswordEncoder().encode("matheusMarques"));
-    }
 }

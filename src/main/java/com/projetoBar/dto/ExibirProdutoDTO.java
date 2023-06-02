@@ -1,4 +1,4 @@
-package com.projetoBar.model.dto;
+package com.projetoBar.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.projetoBar.model.ProdutoModel;

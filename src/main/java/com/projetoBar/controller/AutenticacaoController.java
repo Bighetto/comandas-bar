@@ -1,10 +1,8 @@
 package com.projetoBar.controller;
 
-import com.projetoBar.configuration.security.UsuarioRepository;
-import com.projetoBar.model.dto.ExibirUsuarioDTO;
+import com.projetoBar.dto.ExibirUsuarioDTO;
 import com.projetoBar.service.UsuarioService;
 import lombok.AllArgsConstructor;
-import net.bytebuddy.utility.nullability.AlwaysNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
