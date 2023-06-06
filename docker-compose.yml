@@ -1,20 +1,23 @@
 version: “3.7”
 services:
   projeto-bar:
-    build: .
+    image: openjdk:11
     ports:
       - "8080:8080"
+    volumes:
+      - ./app:/usr/src/app
+      - ./target/comandas-bar-1.0.jar:/app/bar.jar
+    working_dir: /app
     environment:
       IP: mysql
       USERNAME_DB: root
       DATABASE: projetoBar
       PASSWORD_DB: teste
+    command: java -jar bar.jar
     depends_on:
       - mysql
     networks:
       - projetobar
-    volumes:
-      - ./app:/usr/src/app
   mysql:
     image: mysql:8.0
     environment:
