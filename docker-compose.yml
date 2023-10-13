@@ -1,18 +1,26 @@
 version: “3.7”
 services:
   projeto-bar:
-    build:
-      args:
-        versao: 1
+    image: bighetto/beach_lounge_backend:1.0
     ports:
-      - "8080:80"
+      - "8080:8080"
+    working_dir: /app
+    environment:
+      IP: mysql
+      USERNAME_DB: root
+      DATABASE: projetoBar
+      PASSWORD_DB: teste
     depends_on:
       - mysql
-    environment:
-      ip: 0.0.0.0
-      username: root
-      database: projetoBar
-      password: teste
+    networks:
+      - projetobar
+  beach_lounge_frontend:
+    image: bighetto/beach_lounge_frontend:1.0
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - projetobar
   mysql:
     image: mysql:8.0
     environment:
@@ -21,15 +29,14 @@ services:
     ports:
       - "3306:3306"
     restart: always
-#    volume:
-#      - mysql: /var/lib/mysql
-#    networks:
-#      projetoBar:
-#        - aliases:
-#            - mysql_db
-volumes:
-  mysql:
-    driver: local
+    networks:
+      - projetobar
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+networks:
+  projetobar:
+    driver: bridge
 
 
 

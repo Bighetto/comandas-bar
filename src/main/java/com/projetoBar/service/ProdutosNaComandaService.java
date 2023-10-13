@@ -3,16 +3,17 @@ package com.projetoBar.service;
 import com.projetoBar.model.ComandaModel;
 import com.projetoBar.model.ProdutoModel;
 import com.projetoBar.model.ProdutosNaComandaModel;
-import com.projetoBar.model.dto.ExibirProdutoDTO;
-import com.projetoBar.model.dto.ProdutosNaComandaDTO;
+import com.projetoBar.dto.ProdutosNaComandaDTO;
 import com.projetoBar.repository.ComandaRepository;
 import com.projetoBar.repository.ProdutoRepository;
 import com.projetoBar.repository.ProdutosNaComandaRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -82,5 +83,20 @@ public class ProdutosNaComandaService {
         Double valorTotalComanda = produtosNaComandaRepository.selecionarValorTotalComanda(idComanda);
 
         return valorTotalComanda;
+    }
+
+    public void deletarProdutoNaComanda(Integer idComanda, Integer idProduto) {
+
+         Optional<ProdutoModel> produto = produtoRepository.findById(idProduto);
+
+         if (produto.get() == null){
+
+             throw new UsernameNotFoundException("Produto nao encontrado");
+
+         }
+
+         produtosNaComandaRepository.deletarProdutoNaComanda(idComanda, produto.get().getNome());
+
+
     }
 }

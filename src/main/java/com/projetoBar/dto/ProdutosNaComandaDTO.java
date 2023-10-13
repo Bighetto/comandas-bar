@@ -1,4 +1,4 @@
-package com.projetoBar.model.dto;
+package com.projetoBar.dto;
 
 import com.projetoBar.model.ProdutoModel;
 import com.projetoBar.model.ProdutosNaComandaModel;

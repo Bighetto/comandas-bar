@@ -54,4 +54,10 @@ public interface ProdutosNaComandaRepository extends JpaRepository<ProdutosNaCom
     @Modifying
     @Query(value = "update produtos_na_comanda set status_comanda = 'FECHADO' where idcomanda = :id and status_comanda = 'ABERTO' ;", nativeQuery = true)
     void atualizarFechamentoDeComanda(@Param("id")Integer id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "delete FROM produtos_na_comanda WHERE idcomanda = :idComanda and nome_produto = :nomeProduto and status_comanda = 'ABERTO' ;",nativeQuery = true)
+    void deletarProdutoNaComanda(@Param("idComanda")Integer idComanda,
+                                 @Param("nomeProduto") String id);
 }

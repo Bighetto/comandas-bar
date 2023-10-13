@@ -1,8 +1,6 @@
 package com.projetoBar.controller;
 
-import com.projetoBar.model.ProdutosNaComandaModel;
-import com.projetoBar.model.dto.ProdutoDTO;
-import com.projetoBar.model.dto.ProdutosNaComandaDTO;
+import com.projetoBar.dto.ProdutosNaComandaDTO;
 import com.projetoBar.service.ProdutosNaComandaService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +32,17 @@ public class ProdutosNaComandaController {
         ProdutosNaComandaDTO produto = produtosNaComandaService.adicionarProduto(idComanda, quantidadeProduto, idProduto);
 
         return ResponseEntity.ok(produto);
+
+    }
+
+    @DeleteMapping(path = "/deletarProdutoNaComanda/idComanda{idComanda}/idProduto{idProduto}")
+    public ResponseEntity<String> removerProdutoNaComanda(@PathVariable Integer idComanda, @PathVariable Integer idProduto){
+
+        produtosNaComandaService.deletarProdutoNaComanda(idComanda, idProduto);
+
+
+        return ResponseEntity.ok("Deletado com sucesso!");
+
 
     }
 }

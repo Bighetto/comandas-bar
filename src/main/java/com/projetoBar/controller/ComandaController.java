@@ -1,7 +1,7 @@
 package com.projetoBar.controller;
 
 import com.projetoBar.model.ComandaModel;
-import com.projetoBar.model.dto.ExibirTudoNaComandaDTO;
+import com.projetoBar.dto.ExibirTudoNaComandaDTO;
 import com.projetoBar.service.ComandaService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
