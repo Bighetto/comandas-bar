@@ -30,7 +30,7 @@ public class ComandaService {
         novaComanda.setValorTotal(0.00);
         novaComanda.setStatus(StatusEnum.ABERTO.toString());
 
-        if (comandaAberta == null){
+        if (comandaAberta == null){ //TODO:ADICIONAR TRY CATCH
 
             comandaRepository.abrirComanda(id,
                     LocalDate.now(),

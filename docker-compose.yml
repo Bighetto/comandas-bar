@@ -1,21 +1,24 @@
 version: “3.7”
 services:
   projeto-bar:
-    image: openjdk:11
+    image: bighetto/beach_lounge_backend:1.0
     ports:
       - "8080:8080"
-    volumes:
-      - ./app:/usr/src/app
-      - ./target/comandas-bar-1.0.jar:/app/bar.jar
     working_dir: /app
     environment:
       IP: mysql
       USERNAME_DB: root
       DATABASE: projetoBar
       PASSWORD_DB: teste
-    command: java -jar bar.jar
     depends_on:
       - mysql
+    networks:
+      - projetobar
+  beach_lounge_frontend:
+    image: bighetto/beach_lounge_frontend:1.0
+    restart: always
+    ports:
+      - "3000:3000"
     networks:
       - projetobar
   mysql:
